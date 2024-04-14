@@ -1,0 +1,32 @@
+---
+title: "无服务容器远程调试"
+date: 2023-09-10
+slug: "/serverless-container-remote-debugging"
+# canonicalUrl: "https://blog-about-normal-text.com"
+---
+
+# nodejs serverless docker 远程调试思路
+
+- 调试配置中，设置域名
+```json
+"websocketAddress": "wss://example.com/xxx"
+```
+
+- 调试配置中，设置Host请求头
+```json
+"remoteHostHeader": "example.com"
+```
+
+- 容器内，用反代来转发请求给实际的服务
+	- 反代监听80和443端口
+	- 服务的启动项加上`--inspect-brk=9229`
+	- 如果是调试用的websocket
+		- 将Host请求头修改为`localhost`
+			- 如果是域名会因安全问题，被nodejs拒绝调试
+		- 转发到9229端口
+	- 其他情况则直接转发给实际的服务端口，比如9000
+
+- 做好鉴权，防止非开发者调试
+	- 可以用http的路径，在反代里鉴权
+	- 或者用query，在外部网关鉴权
+	- 确保用wss协议
