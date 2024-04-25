@@ -22,12 +22,12 @@ const Footer = () => {
 			</div>
 
 			<div>
-				<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=1" style={{
+				<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030002003085" style={{
 					fontFamily: "Microsoft YaHei",
 					marginRight: "50px",
 				}}>
 					<img src="/beian.png" style={{ float: "left" }} />
-					粤公网安备 ?号
+					粤公网安备44030002003085号
 				</a>
 
 				<a href="https://beian.miit.gov.cn/" target="_blank" style={{
